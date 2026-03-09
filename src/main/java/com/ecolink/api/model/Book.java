@@ -4,14 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Document(collection = "books") // Gem dette i MongoDB i en samling der hedder books
-
 public class Book {
-    
+
     @Id // Dette felt er det unikke ID som MongoDB genererer automatisk
     private String id;
 
@@ -30,28 +28,34 @@ public class Book {
     @Indexed(unique = true) // Ingen to bøger må have samme ISBN
     @Field("isbn")
     private String isbn;
-    
+
+    public Book() {}
+
+    public Book(String id, String title, String author, Integer publishedYear, String isbn) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publishedYear = publishedYear;
+        this.isbn = isbn;
+    }
+
+    // Getters og setters: felterne er private så ingen udefra kan læse eller ændre dem direkte
+    // Getters og setters er de "døre" man skal igennem
+    // getTitle() - Hvad er titlen?
+    // setTitle("Clean Code") - Sæt titlen til Clean Code
+
     public String getId() { return id; }
-public void setId(String id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
 
-public String getTitle() { return title; }
-public void setTitle(String title) { this.title = title; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-public String getAuthor() { return author; }
-public void setAuthor(String author) { this.author = author; }
+    public String getAuthor() { return author; }
+    public void setAuthor(String author) { this.author = author; }
 
-public Integer getPublishedYear() { return publishedYear; }
-public void setPublishedYear(Integer publishedYear) { this.publishedYear = publishedYear; }
+    public Integer getPublishedYear() { return publishedYear; }
+    public void setPublishedYear(Integer publishedYear) { this.publishedYear = publishedYear; }
 
-public String getIsbn() { return isbn; }
-public void setIsbn(String isbn) { this.isbn = isbn; }
-
-// getters og setters: felterne er private så ingen udefra kan læse eller ændre dem direkte
-// Getters og setters er de "døre" man skal igennem 
-
-// getTitle()- Hvad er titlen? 
-// setTitle("Clean Code")- Sæt titlen til Clean Code
-
-
-
+    public String getIsbn() { return isbn; }
+    public void setIsbn(String isbn) { this.isbn = isbn; }
 }
